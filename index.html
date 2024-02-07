@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Hazem Mahmoud" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>CountDown Project</title>
+    <style>
+      :root {
+        --items-background: #161b20;
+        --body-background: #28282b;
+        --modal-background: #301934;
+        --text-colo: #d8d8d8;
+        --timer-color: #fff;
+      }
+      body {
+        background-color: var(--body-background);
+        min-height: 100vh;
+      }
+      #col {
+        color: var(--text-colo);
+        border-radius: 0.5rem;
+        background-color: var(--items-background);
+      }
+      span {
+        color: var(--timer-color);
+      }
+      input[type="number"] {
+        appearance: textfield;
+      }
+      div[role=alert] {
+        background-color: var(--items-background);
+      }
+      .d-n {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="d-flex justify-content-center align-items-center g-3">
+    <div class="container-sm mx-2 d-grid">
+      <div class="row d-flex align-items-center gy-4 flex-column">
+        <div class="col col-md-7 position-relative">
+            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-done">
+                Invalid...your time is already done!
+            </div>
+            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-deadline">
+                OOPS, Deadline invalid! Please check it.
+            </div>
+            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-inter">
+                Inter deadline first.
+            </div>
+        </div>
+        <div class="col-12 col-lg-7 p-3" id="col">
+          <div class="text-center">
+            <h2>Enter your Deadline Date.</h2>
+            <p>Enter the date of your deadline.</p>
+          </div>
+          <form>
+            <div class="row d-flex pt-4 gy-2 row-cols-3">
+              <div class="d-grid gap-2 text-center">
+                <input
+                  type="number"
+                  class="form-control fs-5 bg-dark text-light"
+                  id="inYears"
+                />
+                <span class="fs-5">Year</span>
+              </div>
+              <div class="col d-grid gap-2 text-center">
+                <input
+                  type="number"
+                  class="form-control fs-5 bg-dark text-light"
+                  id="inMonthes"
+                />
+                <span class="fs-5">Month</span>
+              </div>
+              <div class="col d-grid gap-2 text-center">
+                <input
+                  type="number"
+                  class="form-control fs-5 bg-dark text-light"
+                  id="inDays"
+                />
+                <span class="fs-5">Day</span>
+              </div>
+              <input
+                type="button"
+                value="Set deadline"
+                class="btn btn-dark w-100 border border-light mt-3 fs-5"
+                id="deadline__btn"
+              />
+            </div>
+          </form>
+        </div>
+
+        <div class="col col-lg-7 py-4 px-5" id="col">
+          <ul
+            id="timer-container"
+            class="list-unstyled lh-lg list-md-inline d-md-flex justify-content-between text-capitalize"
+          >
+            <li
+              id="days"
+              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              role="timer"
+            >
+              <span class="fs-1">00</span> days
+            </li>
+            <li class="d-none d-md-block fs-1">:</li>
+            <li
+              id="hours"
+              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              role="timer"
+            >
+              <span class="fs-1">00</span> hours
+            </li>
+            <li class="d-none d-md-block fs-1">:</li>
+            <li
+              id="minutes"
+              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              role="timer"
+            >
+              <span class="fs-1">00</span> minutes
+            </li>
+            <li class="d-none d-md-block fs-1">:</li>
+            <li
+              id="seconds"
+              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              role="timer"
+            >
+              <span class="fs-1">00</span> seconds
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="script.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+body {
+    background-color: #fff;
+    min-height: 100vh;
+}
+#col {
+    color: var(--text-colo);
+    border-radius: 0.5rem;
+    border: 2px solid black;
+    background-color: var(--items-background);
+    transition: all 800ms ease;
+}
+.col:nth-child(2) {
+    opacity: 0;
+    transform: translate(0,-100%);
+}
+.col:nth-child(3) {
+    opacity: 0;
+    transform: translate(-100%,0);
+}
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+div[role=alert] {
+    background-color: var(--items-background);
+}
+
+.d-n {
+    display: none;
+}
+
+
+
+
+

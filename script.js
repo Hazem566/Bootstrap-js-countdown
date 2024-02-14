@@ -23,88 +23,122 @@ const weekDays = [
   "Saturday",
 ];
 
-const cols = document.querySelectorAll(".col");
-const deadlineText = document.querySelector(".deadline__text");
-
 const daysElem = document.getElementById("days");
 const hoursElem = document.getElementById("hours");
 const minutesElem = document.getElementById("minutes");
 const secondsElem = document.getElementById("seconds");
 
-const deadlineDone = document.getElementById("alert-done");
-const deadlineInvalid = document.getElementById("alert-deadline");
-const interAlert = document.getElementById("alert-inter");
-
-let minutesIn = document.getElementById("inMinutes");
-let hoursIn = document.getElementById("inHours");
-let daysIn = document.getElementById("inDays");
-let monthesIn = document.getElementById("inMonthes");
 let yearsIn = document.getElementById("inYears");
+let monthesIn = document.getElementById("inMonthes");
+let daysIn = document.getElementById("inDays");
+let hoursIn = document.getElementById("inHours");
+let minutesIn = document.getElementById("inMinutes");
 
+const format = document.getElementById("format");
 const deadlineBtn = document.getElementById("deadline__btn");
+const timerContainer = document.getElementById("timer-container");
+const cols = document.querySelectorAll(".col");
+const deadlineText = document.querySelector(".deadline__text");
 let timeInterval;
 
-const observer = new IntersectionObserver((entris) => {
-  entris.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = "1";
-      entry.target.style.transform = "translate(0,0)";
-    }
-  });
-});
+// Make project interactive
+const observer = new IntersectionObserver(
+  (entris) => {
+    entris.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translate(0,0)";
+      }
+    });
+  },
+  {
+    rootMargin: "100px",
+  }
+);
 cols.forEach((col) => {
   observer.observe(col);
 });
 
+// Format time
 const timeFormat = (time, string) => {
   return time === 1
     ? `<span class="fs-1">${time}</span> ${string}`
     : `<span class="fs-1">${time}</span> ${string}s`;
 };
 
+// Handle time in text
+const handleTimeNumbers = (time) => {
+  return time<10? `0${time}`: time;
+};
+
 const displayDeadline = () => {
+  // Date intered from user
   const interdYears = yearsIn.value;
   const interdMonths = monthesIn.value;
   const interdDays = daysIn.value;
-  const interdHours = hoursIn.value;
   const interdMinutes = minutesIn.value;
 
-  const deadlineDate = new Date(
+  // Handle hour
+  let interdHours =
+    format.value == "pm" ? String(Number(hoursIn.value) + 12) : hoursIn.value;
+  if (format.value == "pm" && hoursIn.value == 12) {
+    interdHours = 12;
+  } else if (format.value == "am" && hoursIn.value == 12) {
+    interdHours = 24;
+  }
+
+  // Get deadline date to calculate
+  const interdDate = new Date(
     interdYears,
-    interdMonths-1,
+    interdMonths - 1,
     interdDays,
     interdHours,
     interdMinutes,
     0
   );
 
-  const deadlineMinutes = deadlineDate.getMinutes();
-  const deadlineHour = deadlineDate.getHours();
-  const deadlineWeekDay = deadlineDate.getDay();
-  deadlineWeekDay = weekDays[deadlineWeekDay];
-  const deadlineMonthDay = deadlineDate.getDate();
-  const deadlineMonth = deadlineDate.getMonth();
-  deadlineMonth = months[deadlineMonth];
-  const deadlineYear = deadlineDate.getFullYear();
+  // Current Date
+  const currentDate = new Date();
+  // Diffrance time
+  const diff = (interdDate.getTime() - currentDate.getTime()) / 1000;
 
-  deadlineText.innerText = `
-      Deadline ends on ${deadlineWeekDay}, ${deadlineMonthDay} ${deadlineMonth} ${deadlineYear} ${deadlineHour}:${deadlineMinutes}
-  `;
+  if (diff < 0) {
+    clearInterval(timeInterval);
+    deadlineText.innerHTML = "<p>Invalid deadline!</p>";
+  } else {
+    const days = Math.floor(diff / (24 * 60 * 60));
+    const hours = Math.floor((diff % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((diff % (60 * 60)) / 60);
+    const seconds = Math.floor(diff % 60);
+    daysElem.innerHTML = timeFormat(handleTimeNumbers(days), "day");
+    hoursElem.innerHTML = timeFormat(handleTimeNumbers(hours), "hour");
+    minutesElem.innerHTML = timeFormat(handleTimeNumbers(minutes), "min");
+    secondsElem.innerHTML = timeFormat(handleTimeNumbers(seconds), "sec");
 
-  const deadlineDateToCalc = deadlineDate.getTime();
-  const now = new Date().getTime();
-  const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth()+1;
-  const currentDay = now.getDate();
-  const currentHour = now.getHours();
-  const currentMinutes = now.getMinutes();
-
-  // if (interdYears<currentYear||
-  //     interdMonths<currentMonth||
-  //     interdDays<currentDay) {
-
-  // }
+    // Display deadline line as text
+    let deadMinute = interdDate.getMinutes();
+    deadMinute = handleTimeNumbers(deadMinute);
+    let deadHour = interdDate.getHours();
+    let deadWeekDay = interdDate.getDay();
+    deadWeekDay = weekDays[deadWeekDay];
+    const deadMonthDay = interdDate.getDate();
+    let deadMonth = interdDate.getMonth();
+    deadMonth = months[deadMonth];
+    const deadYear = interdDate.getFullYear();
+    const deadFormat = format.value;
+    if (deadHour > 12) {
+      deadHour -= 12;
+    }
+    deadHour = handleTimeNumbers(deadHour);
+    // Enter your deadline.
+    deadlineText.innerHTML = `
+    <p class="deadline__text">Deadline ends on ${deadWeekDay}, ${deadMonthDay} ${deadMonth} ${deadYear}, ${deadHour}:${deadMinute}${deadFormat}</p>
+    `;
+    return diff;
+  };
+  return diff;
 };
-// Deadline ends on weekday, day month year hours:minutes am
-
-console.log(new Date().getHours());
+deadlineBtn.addEventListener("click", () => {
+  displayDeadline();
+  timeInterval = setInterval(displayDeadline, 1000);
+});

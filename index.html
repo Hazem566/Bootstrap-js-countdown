@@ -19,28 +19,17 @@
     <title>CountDown Project</title>
   </head>
   <body class="d-flex justify-content-center align-items-center g-3">
-    <div class="container-sm mx-2 d-grid" id="container">
-      <div class="row d-flex align-items-center gy-4 flex-column">
-        <div class="col position-relative">
-            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-done">
-                Invalid...your time is already done!
-            </div>
-            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-deadline">
-                OOPS, Deadline invalid! Please check it.
-            </div>
-            <div class="alert text-light fs-5 text-center position-absolute translate-middle start-50 bottom-50 w-100 d-n" role="alert" id="alert-inter">
-                Inter deadline first.
-            </div>
-        </div>
-        <div class="col col-12 col-lg-7 p-3" id="col">
+    <div class="container-sm mx-2 d-grid py-4" id="container">
+      <div class="row d-flex align-items-center gy-2 gy-md-5 flex-column">
+        <div class="col col-md-9 col-lg-10 p-3" id="col">
           <div class="text-center">
             <h1>Enter your Deadline Date.</h1>
             <p class="deadline__text">Enter your deadline.</p>
           </div>
           <form>
-            <div class="row d-flex pt-4 gy-2 gx-1 justify-content-between">
-              <div class="d-flex pt-4 gy-2 justify-content-between border">
-                <div class="col-2 d-grid gap-2 text-center">
+            <div class="row d-flex pt-1 pt-md-4 gy-2 gx-1 justify-content-between">
+              <div class="d-flex pt-1 gy-2 justify-content-between flex-wrap flex-lg-nowrap gap-2">
+                <div class="col-3 col-lg-2 d-grid gap-2 text-center">
                   <input
                     type="number"
                     class="form-control fs-5 border border-dark test"
@@ -48,7 +37,7 @@
                   />
                   <span class="fs-5">Year</span>
                 </div>
-                <div class="col-2 d-grid gap-2 text-center">
+                <div class="col-3 col-lg-1 d-grid gap-2 text-center">
                   <input
                     type="number"
                     class="form-control fs-5 border border-dark"
@@ -56,7 +45,7 @@
                   />
                   <span class="fs-5">Month</span>
                 </div>
-                <div class="col-2 d-grid gap-2 text-center">
+                <div class="col-3 col-lg-1 d-grid gap-2 text-center">
                   <input
                     type="number"
                     class="form-control fs-5 border border-dark"
@@ -64,7 +53,7 @@
                   />
                   <span class="fs-5">Day</span>
                 </div>
-                <div class="col-2 d-grid gap-2 text-center">
+                <div class="col-3 col-lg-1 d-grid gap-2 text-center">
                   <input
                     type="number"
                     class="form-control fs-5 border border-dark"
@@ -72,7 +61,7 @@
                   />
                   <span class="fs-5">Hour</span>
                 </div>
-                <div class="col-2 d-grid gap-2 text-center">
+                <div class="col-3 col-lg-1 d-grid gap-2 text-center">
                   <input
                     type="number"
                     class="form-control fs-5 border border-dark"
@@ -80,10 +69,10 @@
                   />
                   <span class="fs-5">Min</span>
                 </div>
-                <div class="col col-1">
-                  <select name="format" id="format" class="form-select">
-                    <option value="am">AM</option>
-                    <option value="pm" selected>PM</option>
+                <div class="col-3 col-lg-2">
+                  <select name="format" id="format" class="form-select py-2 text-center">
+                    <option value="am" selected>AM</option>
+                    <option value="pm">PM</option>
                   </select>
                 </div>
               </div>
@@ -97,14 +86,14 @@
           </form>
         </div>
 
-        <div class="col col-lg-7 py-4 px-5" id="col">
+        <div class="col col-md-9 col-lg-10 py-1 py-md-3 px-5" id="col">
           <ul
             id="timer-container"
             class="list-unstyled lh-lg list-md-inline d-md-flex justify-content-between text-capitalize"
           >
             <li
               id="days"
-              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              class="fs-4 text-uppercase gap-1 d-flex flex-md-column gy-1 align-items-center w-100"
               role="timer"
             >
               <span class="fs-1">00</span> days
@@ -112,7 +101,7 @@
             <li class="d-none d-md-block fs-1">:</li>
             <li
               id="hours"
-              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              class="fs-4 text-uppercase gap-1 d-flex flex-md-column gy-1 align-items-center w-100"
               role="timer"
             >
               <span class="fs-1">00</span> hours
@@ -120,18 +109,18 @@
             <li class="d-none d-md-block fs-1">:</li>
             <li
               id="minutes"
-              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              class="fs-4 text-uppercase gap-1 d-flex flex-md-column gy-1 align-items-center w-100"
               role="timer"
             >
-              <span class="fs-1">00</span> minutes
+              <span class="fs-1">00</span> mins
             </li>
             <li class="d-none d-md-block fs-1">:</li>
             <li
               id="seconds"
-              class="fs-4 gap-3 d-flex flex-md-column gy-1 align-items-center"
+              class="fs-4 text-uppercase gap-1 d-flex flex-md-column gy-1 align-items-center w-100"
               role="timer"
             >
-              <span class="fs-1">00</span> seconds
+              <span class="fs-1">00</span> secs
             </li>
           </ul>
         </div>

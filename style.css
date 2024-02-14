@@ -9,11 +9,14 @@ body {
     background-color: var(--items-background);
     transition: all 800ms ease;
 }
-.col:nth-child(2) {
+.col:first-child {
+    opacity: 1;
+}
+.col:first-child {
     opacity: 0;
     transform: translate(0,-100%);
 }
-.col:nth-child(3) {
+.col:last-child {
     opacity: 0;
     transform: translate(-100%,0);
 }
@@ -30,7 +33,9 @@ div[role=alert] {
 .d-n {
     display: none;
 }
-
+#timer-container {
+    transition: all 600ms ease;
+}
 
 
 
